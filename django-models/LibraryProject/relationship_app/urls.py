@@ -17,8 +17,12 @@ urlpatterns = [
     path('librarian-dashboard/', views.librarian_view, name='librarian_view'),
     path('member-dashboard/', views.member_view, name='member_view'),
 
-    # Book management (permission-protected)
-    path('books/add/', views.add_book, name='add_book'),
-    path('books/edit/<int:pk>/', views.edit_book, name='edit_book'),
-    path('books/delete/<int:pk>/', views.delete_book, name='delete_book'),
+    # ✅ Required paths (matching "add_book/", "edit_book/")
+    path('add_book/', views.add_book, name='add_book'),
+    path('edit_book/<int:book_id>/', views.edit_book, name='edit_book'),
+    path('delete_book/<int:book_id>/', views.delete_book, name='delete_book'),
+
+    # Optional: you can keep the old ones too if you want
+    # path('books/add/', views.add_book, name='add_book_alt'),
+    # path('books/edit/<int:pk>/', views.edit_book, name='edit_book_alt'),
 ]
