@@ -1,0 +1,35 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+
+# Environments #
+venv/
+.env
+*.env
+
+# VS Code / PyCharm #
+.vscode/
+.idea/
+
+# Migrations (optional: keep if you want in repo) #
+*/migrations/__pycache__/
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# OS generated files #
+.DS_Store
+Thumbs.db
+
+# Python #
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+.eggs/
+dist/
+build/
