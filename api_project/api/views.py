@@ -1,5 +1,6 @@
 # api/views.py
 from rest_framework import generics, viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser 
 from .serializers import BookSerializer
 from .models import Book
 
@@ -21,3 +22,4 @@ class BookViewSet(viewsets.ModelViewSet):
     
     # Required for creating, updating, and serializing
     serializer_class = BookSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
