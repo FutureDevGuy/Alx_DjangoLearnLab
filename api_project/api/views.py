@@ -1,15 +1,23 @@
 # api/views.py
-from rest_framework import generics
-# Import the serializer we just created
+from rest_framework import generics, viewsets
 from .serializers import BookSerializer
-# Import the model
 from .models import Book
 
+# Note: Keep the BookList view from the previous task for now, 
+# as the instructions ask to keep its URL.
+
 class BookList(generics.ListAPIView):
-    # 1. Define the queryset: what data should this view retrieve?
-    # We want all Book objects.
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+# New: ViewSet for full CRUD operations
+class BookViewSet(viewsets.ModelViewSet):
+    """
+    A ViewSet that provides list, retrieve, create, update, and destroy actions 
+    for the Book model.
+    """
+    # Required for listing and retrieving
     queryset = Book.objects.all()
     
-    # 2. Define the serializer_class: how should the data be formatted?
-    # We use the BookSerializer we defined.
+    # Required for creating, updating, and serializing
     serializer_class = BookSerializer
