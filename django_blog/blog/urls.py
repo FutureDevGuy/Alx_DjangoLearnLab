@@ -1,27 +1,20 @@
 from django.urls import path
-from .views import (
-    register_view,
-    login_view,
-    logout_view,
-    profile_view,
-    PostListView,
-    PostDetailView,
-    PostCreateView,
-    PostUpdateView,
-    PostDeleteView
-)
+from . import views
 
 urlpatterns = [
-    # Authentication URLs
-    path('register/', register_view, name='register'),
-    path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout'),
-    path('profile/', profile_view, name='profile'),
-
-    # Blog CRUD URLs
-    path('posts/', PostListView.as_view(), name='post-list'),
-    path('posts/new/', PostCreateView.as_view(), name='post-create'),
-    path('posts/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    path('posts/<int:pk>/edit/', PostUpdateView.as_view(), name='post-update'),
-    path('posts/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+    # READ: List all posts (used for the homepage)
+    path('', views.post_list, name='post_list'),
+    
+    # CRUD Operations
+    # CREATE: Route for creating a new post
+    path('post/new/', views.post_new, name='post_new'),
+    
+    # UPDATE/DETAIL: Route for viewing and updating a specific post
+    path('post/<int:pk>/update/', views.post_update, name='post_update'),
+    
+    # DELETE: Route for deleting a specific post
+    path('post/<int:pk>/delete/', views.post_delete, name='post_delete'),
+    
+    # DETAIL: Optional: Add a route for viewing a single post
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
 ]
