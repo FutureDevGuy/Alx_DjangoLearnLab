@@ -28,19 +28,18 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('profile/', views.profile_view, name='profile'), # Requires templates/blog/profile.html
+    path('profile/', views.profile_view, name='profile'),
     
     # -------------------------------------
-    # COMMENT CRUD URLs
+    # COMMENT CRUD URLs (Updated to match requested structure)
     # -------------------------------------
     
-    # CREATE: Route for submitting a new comment on a specific post
-    # Note: Uses post_id to link to the parent Post
-    path('posts/<int:pk>/comments/new/', views.CommentCreateView.as_view(), name='comment_create'),
+    # CREATE: Create a comment on a specific post
+    path('post/<int:pk>/comments/new/', views.CommentCreateView.as_view(), name='comment_create'),
     
-    # UPDATE: Route for editing a specific comment
-    path('comments/<int:pk>/edit/', views.CommentUpdateView.as_view(), name='comment_update'),
+    # UPDATE: Edit a specific comment
+    path('comment/<int:pk>/update/', views.CommentUpdateView.as_view(), name='comment_update'),
     
-    # DELETE: Route for deleting a specific comment
-    path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='comment_delete'),
+    # DELETE: Delete a specific comment
+    path('comment/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='comment_delete'),
 ]
