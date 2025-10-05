@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .forms import CustomUserCreationForm, PostForm, CommentForm
 
 from .forms import CustomUserCreationForm
 from .models import Post
