@@ -1,0 +1,5 @@
+body { font-family: Arial, sans-serif; margin: 20px; }
+header { margin-bottom: 20px; }
+.post-item { border-bottom: 1px solid #ddd; padding: 12px 0; }
+.tags a { background:#eef; padding:2px 6px; border-radius:4px; text-decoration:none; }
+.comment { border-left: 3px solid #ddd; padding-left: 10px; margin-bottom:10px; }
