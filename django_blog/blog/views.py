@@ -200,7 +200,7 @@ class SearchResultsView(ListView):
         ).distinct()
 
 
-class PostsByTagView(ListView):
+class PostByTagListView(ListView):
     """Displays posts filtered by a specific tag."""
     model = Post
     template_name = 'blog/post_list_by_tag.html'
@@ -209,10 +209,10 @@ class PostsByTagView(ListView):
     ordering = ['-published_date']
 
     def get_queryset(self):
-        tag = self.kwargs.get('tag_name')
-        return Post.objects.filter(tags__name__iexact=tag).distinct()
+        tag_slug = self.kwargs.get('tag_slug')
+        return Post.objects.filter(tags__slug=tag_slug).distinct()
 
     def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx['tag_name'] = self.kwargs.get('tag_name')
-        return ctx
+        context = super().get_context_data(**kwargs)
+        context['tag_slug'] = self.kwargs.get('tag_slug')
+        return context

@@ -41,7 +41,7 @@ urlpatterns = [
     path('search/', SearchResultsView.as_view(), name='search'),
 
     # TAGS: Display posts filtered by a tag
-    path('tags/<str:tag_name>/', PostsByTagView.as_view(), name='posts-by-tag'),
+    path('tags/<slug:tag_slug>/', views.PostByTagListView.as_view(), name='posts-by-tag'),
 
     # -------------------------------------
     # COMMENT CRUD URLs
