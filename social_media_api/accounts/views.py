@@ -8,21 +8,25 @@ from .serializers import RegisterSerializer, UserSerializer, LoginSerializer
 
 User = get_user_model()
 
+
 class RegisterAPIView(APIView):
+    """Handles user registration and returns a token."""
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-            token = Token.objects.get(user=user)
+            token, _ = Token.objects.get_or_create(user=user)  # ✅ FIXED
             return Response({
                 'token': token.key,
                 'user': UserSerializer(user, context={'request': request}).data
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class LoginAPIView(APIView):
+    """Handles user login and token retrieval."""
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
@@ -30,13 +34,20 @@ class LoginAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         username = serializer.validated_data['username']
         password = serializer.validated_data['password']
+
         user = authenticate(request, username=username, password=password)
         if not user:
             return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
         token, _ = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key, 'user': UserSerializer(user, context={'request': request}).data})
+        return Response({
+            'token': token.key,
+            'user': UserSerializer(user, context={'request': request}).data
+        })
+
 
 class ProfileAPIView(RetrieveUpdateAPIView):
+    """Allows authenticated users to view or update their profile."""
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
