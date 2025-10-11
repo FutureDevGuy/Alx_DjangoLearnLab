@@ -31,6 +31,8 @@ INSTALLED_APPS = [
 
     # Local apps
     'accounts',
+    'django_filters',
+    'posts',
 ]
 
 MIDDLEWARE = [
@@ -106,4 +108,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
+    
 }
+REST_FRAMEWORK.setdefault('DEFAULT_PAGINATION_CLASS', 'rest_framework.pagination.PageNumberPagination')
+REST_FRAMEWORK.setdefault('PAGE_SIZE', 10)
+REST_FRAMEWORK.setdefault('DEFAULT_FILTER_BACKENDS', [
+    'django_filters.rest_framework.DjangoFilterBackend',
+    'rest_framework.filters.SearchFilter',
+    'rest_framework.filters.OrderingFilter',
+])
+

@@ -26,3 +26,21 @@ Custom user extends **AbstractUser** with:
 - `followers` (ManyToManyField to self, symmetrical=False)
 
 ##
+
+
+# Posts & Comments Endpoints
+
+GET /api/posts/                 - list posts (paginated)
+POST /api/posts/                - create post (auth required)
+GET /api/posts/{id}/            - retrieve post (includes comments)
+PUT/PATCH /api/posts/{id}/      - update post (owner only)
+DELETE /api/posts/{id}/         - delete post (owner only)
+
+GET /api/comments/              - list comments
+POST /api/comments/             - create comment (auth required)
+GET/PUT/DELETE /api/comments/{id}/ - retrieve/update/delete comment (owner only)
+
+Filtering example:
+GET /api/posts/?search=keyword
+GET /api/posts/?ordering=created_at
+GET /api/posts/?author=1
